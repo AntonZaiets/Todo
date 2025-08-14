@@ -1,19 +1,36 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:3001";
+import { IdScheme, TodoListScheme, TodoScheme } from '../../../shared/schemes';
+import { requestForm } from '@/api/utils/requestForm';
+import { TTask, TTasksList } from '../../../shared/types';
 
 export const getAllTodos = async () => {
-  return await axios.get(`${API_URL}/todos`);
+  return requestForm<TTasksList>({
+    method: 'get',
+    url: '/todos',
+    zod: TodoListScheme,
+  });
 };
 
 export const addTodo = async (title: string) => {
-  return await axios.post(`${API_URL}/todos`, { title });
+  return requestForm<TTask>({
+    method: 'post',
+    url: '/todos',
+    params: { title },
+    zod: TodoScheme.pick({ title: true }),
+  });
 };
 
 export const deleteTodo = async (id: string) => {
-  return await axios.delete(`${API_URL}/todos/${id}`);
+  return requestForm<string>({
+    method: 'delete',
+    url: `/todos/${id}`,
+    zod: IdScheme,
+  });
 };
 
 export const toggleTodo = async (id: string) => {
-  return await axios.patch(`${API_URL}/todos/${id}`);
+  return requestForm<string>({
+    method: 'patch',
+    url: `/todos/${id}`,
+    zod: IdScheme,
+  });
 };
