@@ -1,12 +1,6 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
-export type Task = {
-  id: string;
-  title: string;
-  completed: boolean;
-};
-
-export type TFilter = "all" | "completed" | "incomplete";
+export type TFilter = 'all' | 'completed' | 'incomplete';
 
 export type TodoStore = {
   filter: TFilter;
@@ -14,6 +8,6 @@ export type TodoStore = {
 };
 
 export const useStore = create<TodoStore>((set) => ({
-  filter: "all",
+  filter: 'all',
   setFilter: (filter) => set({ filter }),
 }));
