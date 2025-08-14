@@ -11,6 +11,10 @@ export default tseslint.config(
                 tsconfigRootDir: import.meta.dirname,
             },
         },
+      rules: {
+        "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+        "@typescript-eslint/no-confusing-void-expression": "on",
+      },
     },
     tseslint.configs.strictTypeChecked,
     tseslint.configs.stylisticTypeChecked,
